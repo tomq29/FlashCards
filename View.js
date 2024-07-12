@@ -1,5 +1,6 @@
 const Model = require('./Model');
 const inquirer = require('inquirer');
+const { EOL } = require('os');
 
 class View {
   getName() {
@@ -15,9 +16,9 @@ class View {
         name: 'Topic',
         message: 'Выберите тему квиза',
         choices: [
-          { name: 'Рандомные вопросы', value: 'randomQuestions' },
-          { name: 'Искусство', value: 'artQuestions' },
-          { name: 'Значение идиом', value: 'idiomsQuestions' },
+          { name: 'Рандомные вопросы', value: Model.randomQuestions },
+          { name: 'Искусство', value: Model.artQuestions },
+          { name: 'Значение идиом', value: Model.idiomsQuestions },
           { name: 'Выход', value: 4 },
         ],
       },
@@ -25,13 +26,31 @@ class View {
   }
 
   doQuiz(topic) {
-    inquirer.default.prompt(topic).then((answers) =>
+    return inquirer.default.prompt(topic).then((answers) => {
+      const score = Object.values(answers)
+        .map((answer) => Boolean(answer))
+        .reduce((acc, item) => acc + item);
+
+      const remainder = 5 - score;
+
+      const heart = '♡ ';
+
+      const fullHeart = '❤︎ ';
+
       console.log(
-        `Ваше количество очков за Quiz: ${Object.values(answers)
-          .map((answer) => Boolean(answer))
-          .reduce((acc, item) => acc + item)}/${Object.values(answers).length}`
-      )
-    );
+        `Ваше количество очков за Quiz: ${score}/${
+          Object.values(answers).length
+        } ${EOL} ${EOL}  ${fullHeart.repeat(score)} ${heart.repeat(
+          remainder
+        )} ${EOL}`
+      );
+
+      return score;
+    });
+  }
+
+  finalScore(username, num) {
+    console.log(`${username}, твой общий счет ${num}/15`);
   }
 }
 
