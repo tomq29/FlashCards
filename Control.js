@@ -1,7 +1,4 @@
-const Model = require('./Model');
-const View = require('./View');
-
-class Controll {
+class Control {
   constructor(model, view) {
     this.model = model;
     this.view = view;
@@ -40,6 +37,4 @@ class Controll {
   }
 }
 
-const app = new Controll(new Model(), new View());
-
-app.runner();
+module.exports = Control;
