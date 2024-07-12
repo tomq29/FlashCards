@@ -19,7 +19,7 @@ class View {
     ])
   }
 
-  static doQuiz (topic) {
+   doQuiz (topic) {
     inquirer.default.prompt(topic).then((answers) =>
       console.log(
         `Ваше количество очков за Quiz: ${Object.values(answers).map((answer) => Boolean(answer)).reduce(
