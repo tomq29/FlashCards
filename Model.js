@@ -136,9 +136,9 @@ class Model {
       name: 'question 1',
       message: 'Выберете самую известную мексиканскую художницу из списка:',
       choices: [
-        { name: 'Ева лонгория', value: 0 },
-        { name: 'Фрида кало', value: 1 },
-        { name: 'Леонора каррингтон', value: 0 },
+        { name: 'Ева Лонгория', value: 0 },
+        { name: 'Фрида Кало', value: 1 },
+        { name: 'Леонора Каррингтон', value: 0 },
       ],
     },
     {
@@ -185,3 +185,4 @@ class Model {
 }
 
 module.exports = Model;
+

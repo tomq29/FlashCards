@@ -6,11 +6,21 @@ class Controll {
     this.model = model;
     this.view = view;
   }
-  async get(params) {
-    const x = await this.view.getNameAndTopic();
-    console.log(x);
+  async startQuiz() {
+    const choice = await this.view.getNameAndTopic();
+  
+   // console.log(x);
+    if(choice.Topic === 1){
+      await this.view.doQuiz(Model.randomQuestions)
+    }
+    else if(choice.Topic === 2){
+      await this.view.doQuiz(Model.artQuestions)
+    }
+    else if(choice.Topic === 3){
+      await this.view.doQuiz(Model.idiomsQuestions)
+    }
   }
 }
 
 const app = new Controll(new Model(), new View());
-app.get()
+app.startQuiz()
